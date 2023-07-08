@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js" integrity="sha512-nnNHpffPSgINrsR8ZAIgFUIMexORL5tPwsfktOTxVYSv+AUAILuFYWES8IHl+hhIhpFGlKvWFiz9ZEusrPcSBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="slide1" class="slide">
+      <form id="testform" action="/pp">
+        <input type="text" placeholder="name" name="firstname">
+        <input type="password" placeholder="password" name="first">
+        <button>hello</button>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.querySelector("#testform").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      // Example JavaScript code to retrieve form data using FormData
+      const form = document.querySelector('form');
+      const formData = new FormData(form);
+
+      // Access form data using FormData methods
+      const username = formData.get('username');
+      const password = formData.get('password');
+
+      // Convert FormData object to a plain object
+      let plainFormData = Object.fromEntries(formData.entries());
+      plainFormData.partsTable = [{
+        name: "ramesh",
+        age: 21
+      }, {
+        name: "sureesh",
+        age: 60
+      }]
+      // Log the form data
+      // console.log(plainFormData);
+
+      axios.get('/center/showInventory', {
+          withCredentials: true
+        })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
+    });
+  </script>
+</body>
+
+</html>
